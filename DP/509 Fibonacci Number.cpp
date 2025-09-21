@@ -1,29 +1,62 @@
-#include <bits/stdc++.h>
-using namespace std;
+//Kadak Maal Hai
+class Solution {
+public:
+//Top Down (Memoization)
+    // int solve(int n,vector<int>&dp)
+    // {
+    //     if(n<=1)
+    //     return n;
 
-void rotateArray(vector<int>& nums, int k) {
-    int n = nums.size();
-    k %= n; // handle cases where k >= n
-    if (k == 0) return;
+    //     if(dp[n]!=-1)
+    //     return dp[n];
 
-    reverse(nums.begin(), nums.begin() + (n - k));
-    reverse(nums.begin() + (n - k), nums.end());
-    reverse(nums.begin(), nums.end());
-}
+    //     dp[n]=solve(n-1,dp)+solve(n-2,dp);
 
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    //     return solve(n,dp);
+        
+    // }
 
-    int n, k;
-    cin >> n >> k;
-    vector<int> nums(n);
-    for (int i = 0; i < n; i++) cin >> nums[i];
+    //Bottom Up
 
-    rotateArray(nums, k);
+    // int solve(int n,vector<int>&dp)
+    // {   
+       
+    //     dp[0]=0;
+    //     dp[1]=1;
 
-    for (int x : nums) cout << x << " ";
-    cout << "\n";
+    //     for(int i=2;i<=n;i++)
+    //     {
+    //         dp[i]=dp[i-1]+dp[i-2];
+    //     }
 
-    return 0;
-}
+    //     return dp[n];
+        
+    // }
+
+    //with constant time space
+    int solve(int n,vector<int>&dp)
+    {   
+       
+       int a=0;
+       int b=1;
+       int c;
+
+        for(int i=1;i<n;i++)
+        {
+           c=a+b;
+            a=b;
+            b=c;
+        }
+
+        return c;
+        
+    }
+    int fib(int n) {
+        if(n==0) return 0;
+        if(n==1) return 1;
+
+        vector<int>dp(n+1,-1);
+
+        return solve(n,dp);
+    }
+};
